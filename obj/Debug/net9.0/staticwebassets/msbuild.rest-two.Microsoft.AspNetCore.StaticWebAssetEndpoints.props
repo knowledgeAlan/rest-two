@@ -364,7 +364,7 @@
       <AssetFile>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\rest-two.bundle.scp.css))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Content-Length","Value":"1077"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00228AJgHZ8lEjsnOIG1KNRehX/\u002BwSHhsTYeO20hLZdK0JA=\u0022"},{"Name":"Last-Modified","Value":"Fri, 01 Nov 2024 10:02:44 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Content-Length","Value":"1077"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00228AJgHZ8lEjsnOIG1KNRehX/\u002BwSHhsTYeO20hLZdK0JA=\u0022"},{"Name":"Last-Modified","Value":"Thu, 07 Nov 2024 10:21:12 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>

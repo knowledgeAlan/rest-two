@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ijMT5vMMCHkrgviH4m2dtw2LnueA9kEwmSjQ5e3Y/rI=",
+  "Hash": "8NSuUHWRnbQug8A81BTvyMjiucLTAsIlfJNOOXK/GOs=",
   "Source": "rest-two",
   "BasePath": "_content/rest-two",
   "Mode": "Default",
@@ -9144,7 +9144,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 01 Nov 2024 10:02:44 GMT"
+          "Value": "Thu, 07 Nov 2024 10:21:12 GMT"
         },
         {
           "Name": "Content-Encoding",
@@ -9188,7 +9188,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 01 Nov 2024 10:02:44 GMT"
+          "Value": "Thu, 07 Nov 2024 10:21:12 GMT"
         }
       ],
       "EndpointProperties": []
@@ -9216,7 +9216,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 01 Nov 2024 10:02:44 GMT"
+          "Value": "Thu, 07 Nov 2024 10:21:12 GMT"
         },
         {
           "Name": "Content-Encoding",
@@ -9254,7 +9254,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 01 Nov 2024 10:02:44 GMT"
+          "Value": "Thu, 07 Nov 2024 10:21:12 GMT"
         },
         {
           "Name": "Content-Encoding",
@@ -9298,7 +9298,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 01 Nov 2024 10:02:44 GMT"
+          "Value": "Thu, 07 Nov 2024 10:21:12 GMT"
         }
       ],
       "EndpointProperties": []
@@ -9326,7 +9326,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 01 Nov 2024 10:02:44 GMT"
+          "Value": "Thu, 07 Nov 2024 10:21:12 GMT"
         },
         {
           "Name": "Content-Encoding",
