@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rest_two.data;
+using rest_two.Mappers;
 
 namespace rest_two.Controllers
 {
@@ -21,7 +22,7 @@ namespace rest_two.Controllers
         [HttpGet]
         public IActionResult GetAll() {
 
-            var stock = _context.Stocks.ToList();
+            var stock = _context.Stocks.ToList().Select(s=> s.ToStockDto());
 
             return Ok(stock);
         }
@@ -35,7 +36,7 @@ namespace rest_two.Controllers
             if(stock == null){
                 return NotFound();
             }
-            return Ok(stock);
+            return Ok(stock.ToStockDto());
         }
 
         
