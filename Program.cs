@@ -20,11 +20,6 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
         );
-// builder.Services.AddDbContext<ApplicationDBContext>(options =>
-// {
-//     options.UseMySQL(connectionString);
-// });
-
 
 var app = builder.Build();
 
