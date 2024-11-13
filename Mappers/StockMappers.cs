@@ -23,5 +23,17 @@ namespace rest_two.Mappers
                         MarketCap = stockModel.MarketCap,
                 };
         }
+
+
+        public static Stock ToStockFromCreateDto(this CreateStockRequestDto createStockRequest){    
+            return new Stock {
+                        Symbol = createStockRequest.Symbol,
+                        CompanyName = createStockRequest.CompanyName,
+                        Purchase = createStockRequest.Purchase,
+                        LastDiv = createStockRequest.LastDiv,
+                        Industry = createStockRequest.Industry,
+                        MarketCap = createStockRequest.MarketCap,
+            };
+        }
     }
 }
