@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,12 @@ namespace rest_two.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll() {
+        public async Task<IActionResult> GetAll() {
 
-            var stock = _context.Stocks.ToList().Select(s=> s.ToStockDto());
+            var stocks = await _context.Stocks.ToListAsync();
+            var stockDto = stocks.Select(s=> s.ToStockDto());
 
-            return Ok(stock);
+            return Ok(stocks);
         }
 
 
@@ -75,6 +77,25 @@ namespace rest_two.Controllers
             return Ok(stockModel.ToStockDto());
         }
 
+
+
+        [HttpDelete]
+        [Route("{id}")]
+
+        public IActionResult Delete([FromRoute] int id){
+            var stockModel = _context.Stocks.FirstOrDefault(x=>x.Id == id);
+
+            if(stockModel == null){
+                return NotFound();
+            }
+
+
+            _context.Stocks.Remove(stockModel);
+
+            _context.SaveChanges();
+
+            return NoContent();
+        }
         
     }
 }
