@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rest_two.data;
 using rest_two.Dtos.stock;
+using rest_two.interfaces;
 using rest_two.Mappers;
 
 namespace rest_two.Controllers
@@ -16,15 +17,19 @@ namespace rest_two.Controllers
     {
 
         private readonly ApplicationDBContext _context;
+        
+        private readonly IStockRepository stockRepository;
 
-        public StockController(ApplicationDBContext context){
+
+        public StockController(ApplicationDBContext context,IStockRepository iStockRepository){
             _context = context;
+            stockRepository = iStockRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll() {
 
-            var stocks = await _context.Stocks.ToListAsync();
+            var stocks = await stockRepository.GetAllAsync();
             var stockDto = stocks.Select(s=> s.ToStockDto());
 
             return Ok(stocks);
@@ -45,12 +50,12 @@ namespace rest_two.Controllers
 
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateStockRequestDto createStockRequestDto){
+        public async Task<IActionResult> Create([FromBody] CreateStockRequestDto createStockRequestDto){
 
             var stockModel = createStockRequestDto.ToStockFromCreateDto();
 
-            _context.Stocks.Add(stockModel);
-            _context.SaveChanges();
+            await _context.Stocks.AddAsync(stockModel);
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById),new {id = stockModel.Id},stockModel.ToStockDto());
         }
 
@@ -58,9 +63,9 @@ namespace rest_two.Controllers
         [HttpPut]
         [Route("{id}")]
 
-        public IActionResult Update([FromRoute]int id,[FromBody]  UpdateStockRequestDto updateStockRequestDto){
+        public async Task<IActionResult> Update([FromRoute]int id,[FromBody]  UpdateStockRequestDto updateStockRequestDto){
 
-            var stockModel = _context.Stocks.FirstOrDefault(x=>x.Id == id);
+            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x=>x.Id == id);
 
             if(stockModel == null){
                 return NotFound();
@@ -72,7 +77,7 @@ namespace rest_two.Controllers
             stockModel.Industry=updateStockRequestDto.Industry;
             stockModel.MarketCap=updateStockRequestDto.MarketCap;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(stockModel.ToStockDto());
         }
@@ -82,8 +87,8 @@ namespace rest_two.Controllers
         [HttpDelete]
         [Route("{id}")]
 
-        public IActionResult Delete([FromRoute] int id){
-            var stockModel = _context.Stocks.FirstOrDefault(x=>x.Id == id);
+        public async Task<IActionResult> Delete([FromRoute] int id){
+            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x=>x.Id == id);
 
             if(stockModel == null){
                 return NotFound();
@@ -92,7 +97,7 @@ namespace rest_two.Controllers
 
             _context.Stocks.Remove(stockModel);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
