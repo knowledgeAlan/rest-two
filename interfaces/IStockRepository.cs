@@ -11,7 +11,7 @@ namespace rest_two.interfaces
     {
         Task<List<Stock>> GetAllAsync();
 
-        Task<Stock?> GetByIdAsync();
+        Task<Stock?> GetByIdAsync(int id);
 
         Task<Stock> CreateAsync(Stock stockModel);
 

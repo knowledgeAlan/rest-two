@@ -38,7 +38,7 @@ namespace rest_two.repository
 
 
             _context.Stocks.Remove(stockModel);
-            await _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return stockModel;
 
@@ -47,28 +47,31 @@ namespace rest_two.repository
 
         public async Task<List<Stock>> GetAllAsync()
         {
-            return  _context.Stocks.ToListAsync();
+            return await _context.Stocks.ToListAsync();
         }
 
-        public async Task<Stock?> GetByIdAsync()
+        public async Task<Stock?> GetByIdAsync(int id)
         {
             return await _context.Stocks.FindAsync(id);
         }
 
         public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto stockRequestDto)
         {
-            var existStockModel = await _context.Stocks.FirstOrDefaultAsync(x-> x.id==id);
+            var existStockModel = await _context.Stocks.FirstOrDefaultAsync(x=> x.Id==id);
 
             if(existStockModel == null){
                 return null;
             }
 
-             stockModel.Symbol=stockRequestDto.Symbol;
-            stockModel.CompanyName=stockRequestDto.CompanyName;
-            stockModel.Purchase=stockRequestDto.Purchase;
-            stockModel.LastDiv=stockRequestDto.LastDiv;
-            stockModel.Industry=stockRequestDto.Industry;
-            stockModel.MarketCap=stockRequestDto.MarketCap;
+            existStockModel.Symbol=stockRequestDto.Symbol;
+            existStockModel.CompanyName=stockRequestDto.CompanyName;
+            existStockModel.Purchase=stockRequestDto.Purchase;
+            existStockModel.LastDiv=stockRequestDto.LastDiv;
+            existStockModel.Industry=stockRequestDto.Industry;
+            existStockModel.MarketCap=stockRequestDto.MarketCap;
+
+            await _context.SaveChangesAsync();
+            return existStockModel;
         }
     }
 }
