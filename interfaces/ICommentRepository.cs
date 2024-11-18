@@ -1,0 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using rest_two.Models;
+
+namespace rest_two.interfaces
+{
+    public interface ICommentRepository
+    {
+        public Task<List<Comment>> GetAllAsync();
+    }
+}

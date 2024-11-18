@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using rest_two.data;
 using rest_two.interfaces;
+using rest_two.Mappers;
 using rest_two.repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
                 .EnableDetailedErrors()
         );
 builder.Services.AddScoped<IStockRepository,StockRespository>();
+builder.Services.AddScoped<ICommentRepository,CommentRepository>();
 builder.Services.AddControllers();
 var app = builder.Build();
 
