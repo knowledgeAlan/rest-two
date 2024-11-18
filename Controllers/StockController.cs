@@ -37,9 +37,9 @@ namespace rest_two.Controllers
 
 
         [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute]int id){
+        public async Task<ActionResult> GetById([FromRoute]int id){
 
-            var stock = _context.Stocks.Find(id);
+            var stock = await stockRepository.GetByIdAsync(id);
 
             if(stock == null){
                 return NotFound();
@@ -54,8 +54,7 @@ namespace rest_two.Controllers
 
             var stockModel = createStockRequestDto.ToStockFromCreateDto();
 
-            await _context.Stocks.AddAsync(stockModel);
-            await _context.SaveChangesAsync();
+            await stockRepository.CreateAsync(stockModel);
             return CreatedAtAction(nameof(GetById),new {id = stockModel.Id},stockModel.ToStockDto());
         }
 
@@ -65,19 +64,11 @@ namespace rest_two.Controllers
 
         public async Task<IActionResult> Update([FromRoute]int id,[FromBody]  UpdateStockRequestDto updateStockRequestDto){
 
-            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x=>x.Id == id);
+            var stockModel = await stockRepository.UpdateAsync(id, updateStockRequestDto);
 
             if(stockModel == null){
                 return NotFound();
             }
-            stockModel.Symbol=updateStockRequestDto.Symbol;
-            stockModel.CompanyName=updateStockRequestDto.CompanyName;
-            stockModel.Purchase=updateStockRequestDto.Purchase;
-            stockModel.LastDiv=updateStockRequestDto.LastDiv;
-            stockModel.Industry=updateStockRequestDto.Industry;
-            stockModel.MarketCap=updateStockRequestDto.MarketCap;
-
-            await _context.SaveChangesAsync();
 
             return Ok(stockModel.ToStockDto());
         }
@@ -88,7 +79,7 @@ namespace rest_two.Controllers
         [Route("{id}")]
 
         public async Task<IActionResult> Delete([FromRoute] int id){
-            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x=>x.Id == id);
+            var stockModel = await stockRepository.DeleteAsync(id);
 
             if(stockModel == null){
                 return NotFound();
