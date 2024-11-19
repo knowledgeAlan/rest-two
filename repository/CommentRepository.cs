@@ -18,9 +18,14 @@ namespace rest_two.Mappers
             _context = context;
         }
 
-        public Task<List<Comment>> GetAllAsync()
+        public   List<Comment> GetAll()
         {
-           return _context.Comments.ToListAsync();
+           return   _context.Comments.ToList();
+        }
+
+        public Comment GetById(int id)
+        {
+              return _context.Comments.Find(id);
         }
     }
 }

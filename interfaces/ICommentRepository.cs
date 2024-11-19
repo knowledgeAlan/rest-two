@@ -8,6 +8,8 @@ namespace rest_two.interfaces
 {
     public interface ICommentRepository
     {
-        public Task<List<Comment>> GetAllAsync();
+        public List<Comment> GetAll();
+
+        public Comment GetById(int id);
     }
 }

@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>rest_two</RootNamespace>
     <InvariantGloblization>false</InvariantGloblization>
+  
   </PropertyGroup>
 
   <ItemGroup>

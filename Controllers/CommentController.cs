@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rest_two.interfaces;
+using rest_two.Mappers;
 
 namespace rest_two.Controllers
 {
@@ -22,8 +23,25 @@ namespace rest_two.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(){
-            var comment = await commentRepository.GetAllAsync();
+        public  IActionResult GetAll(){
+            var comments =   commentRepository.GetAll();
+
+            var commentDto = comments.Select(x => x.ToCommentDto());
+            
+            return Ok(commentDto);
+
+            
+        }
+
+
+        [HttpGet("{id}")]
+        public IActionResult GetById([FromRoute]int id){
+            var comment = commentRepository.GetById(id);
+
+            if(comment == null){
+                return NotFound();
+            }
+            return Ok(comment.ToCommentDto());
         }
     }
 }
