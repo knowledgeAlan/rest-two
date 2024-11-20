@@ -203,3 +203,6 @@
 /Users/uniweb/Desktop/cshap-workspace/rest-two/obj/Debug/net9.0/rest-two.pdb
 /Users/uniweb/Desktop/cshap-workspace/rest-two/obj/Debug/net9.0/rest-two.genruntimeconfig.cache
 /Users/uniweb/Desktop/cshap-workspace/rest-two/obj/Debug/net9.0/ref/rest-two.dll
+/Users/uniweb/Desktop/cshap-workspace/rest-two/bin/Debug/net9.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/uniweb/Desktop/cshap-workspace/rest-two/bin/Debug/net9.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/uniweb/Desktop/cshap-workspace/rest-two/bin/Debug/net9.0/Newtonsoft.Json.Bson.dll

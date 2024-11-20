@@ -45,9 +45,9 @@ namespace rest_two.repository
 
         }
 
-        public async Task<List<Stock>> GetAllAsync()
+        public  List<Stock> GetAllAsync()
         {
-            return await _context.Stocks.ToListAsync();
+            return  _context.Stocks.Include(c=>c.Comments).ToList();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using rest_two.Dtos.comment;
+using rest_two.Models;
 
 namespace rest_two.Dtos.stock
 {
@@ -23,5 +25,8 @@ namespace rest_two.Dtos.stock
         public string Industry { get; set; } = string.Empty;
 
         public long MarketCap { get; set; } 
+
+
+        public List<CommentDto> Comments{ get; set; } 
     }
 }

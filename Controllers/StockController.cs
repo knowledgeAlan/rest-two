@@ -27,9 +27,9 @@ namespace rest_two.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() {
+        public    IActionResult GetAll() {
 
-            var stocks = await stockRepository.GetAllAsync();
+            var stocks =  stockRepository.GetAllAsync();
             var stockDto = stocks.Select(s=> s.ToStockDto());
 
             return Ok(stocks);

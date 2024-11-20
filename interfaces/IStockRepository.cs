@@ -9,7 +9,7 @@ namespace rest_two.interfaces
 {
     public interface IStockRepository
     {
-        Task<List<Stock>> GetAllAsync();
+        List<Stock> GetAllAsync();
 
         Task<Stock?> GetByIdAsync(int id);
 

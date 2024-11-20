@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using rest_two.data;
 using rest_two.interfaces;
 using rest_two.Mappers;
@@ -26,6 +27,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddScoped<IStockRepository,StockRespository>();
 builder.Services.AddScoped<ICommentRepository,CommentRepository>();
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options=>{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
