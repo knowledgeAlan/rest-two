@@ -18,6 +18,13 @@ namespace rest_two.Mappers
             _context = context;
         }
 
+        public Comment Create(Comment comment)
+        {
+             _context.Comments.Add(comment);
+             _context.SaveChanges();
+             return comment;
+        }
+
         public   List<Comment> GetAll()
         {
            return   _context.Comments.ToList();

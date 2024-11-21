@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Arch.EntityFrameworkCore.Internal;
 using rest_two.data;
 using rest_two.Dtos.stock;
 using rest_two.interfaces;
@@ -53,6 +54,11 @@ namespace rest_two.repository
         public async Task<Stock?> GetByIdAsync(int id)
         {
             return await _context.Stocks.FindAsync(id);
+        }
+
+        public bool StockExists(int id)
+        {
+             return _context.Stocks.Any(s=>s.Id == id);
         }
 
         public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto stockRequestDto)

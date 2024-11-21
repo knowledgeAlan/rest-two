@@ -21,6 +21,7 @@ namespace rest_two.interfaces
 
         Task<Stock?> DeleteAsync(int id);
 
+        bool StockExists(int id);
 
     }
 }

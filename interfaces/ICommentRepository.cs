@@ -11,5 +11,8 @@ namespace rest_two.interfaces
         public List<Comment> GetAll();
 
         public Comment GetById(int id);
+
+
+        public Comment Create(Comment comment);
     }
 }
