@@ -35,5 +35,19 @@ namespace rest_two.Mappers
                 }
             ;
         }
+
+
+         public static Comment ToCommentFromUpdate(this UpdateCommentRequestDto updateCommentRequestDto,int id){
+            
+            return new Comment
+
+                {
+                    
+                    Title= updateCommentRequestDto.Title,
+                    Content = updateCommentRequestDto.Content,
+                    
+                }
+            ;
+        }
     }
 }

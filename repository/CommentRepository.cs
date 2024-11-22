@@ -34,5 +34,21 @@ namespace rest_two.Mappers
         {
               return _context.Comments.Find(id);
         }
+
+        public Comment Update(int id, Comment comment)
+        {
+             var existingComment = _context.Comments.Find(id);
+
+             if(existingComment == null){
+                return null;
+             }
+
+             existingComment.Content = comment.Content;
+             existingComment.Id = id;
+             existingComment.Title = comment.Title;
+        
+             _context.SaveChanges();
+             return existingComment;
+        }
     }
 }

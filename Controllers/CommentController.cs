@@ -63,5 +63,18 @@ namespace rest_two.Controllers
                 return CreatedAtAction(nameof(GetById),new {id=commentModel},commentModel.ToCommentDto());
 
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public IActionResult Update([FromRoute] int id,[FromBody] UpdateCommentRequestDto updateCommentRequestDto){
+            
+            var commentModel = commentRepository.Update(id, updateCommentRequestDto.ToCommentFromUpdate());
+            
+            if(commentModel == null) {
+                return NotFound();
+            }
+
+            return Ok(commentModel.ToCommentDto());
+        }
     }
 }

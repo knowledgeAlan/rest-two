@@ -14,5 +14,7 @@ namespace rest_two.interfaces
 
 
         public Comment Create(Comment comment);
+
+        public Comment Update(int id, Comment comment);
     }
 }
