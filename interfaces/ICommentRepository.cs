@@ -8,13 +8,16 @@ namespace rest_two.interfaces
 {
     public interface ICommentRepository
     {
-        public List<Comment> GetAll();
+        List<Comment> GetAll();
 
-        public Comment GetById(int id);
+        Comment GetById(int id);
 
 
-        public Comment Create(Comment comment);
+        Comment Create(Comment comment);
 
-        public Comment Update(int id, Comment comment);
+        Comment Update(int id, Comment comment);
+
+
+        Comment Delete(int id);
     }
 }

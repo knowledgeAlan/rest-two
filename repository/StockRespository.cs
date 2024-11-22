@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Arch.EntityFrameworkCore.Internal;
 using rest_two.data;
 using rest_two.Dtos.stock;
+using rest_two.helpers;
 using rest_two.interfaces;
 using rest_two.Models;
 
@@ -46,7 +47,7 @@ namespace rest_two.repository
 
         }
 
-        public  List<Stock> GetAllAsync()
+        public  List<Stock> GetAll(QueryObject queryObject)
         {
             return  _context.Stocks.Include(c=>c.Comments).ToList();
         }

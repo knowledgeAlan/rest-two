@@ -68,13 +68,25 @@ namespace rest_two.Controllers
         [Route("{id}")]
         public IActionResult Update([FromRoute] int id,[FromBody] UpdateCommentRequestDto updateCommentRequestDto){
             
-            var commentModel = commentRepository.Update(id, updateCommentRequestDto.ToCommentFromUpdate());
+            var commentModel = commentRepository.Update(id, updateCommentRequestDto.ToCommentFromUpdate(id));
             
             if(commentModel == null) {
                 return NotFound();
             }
 
             return Ok(commentModel.ToCommentDto());
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IActionResult Delete([FromRoute] int id){
+            var commentModel = commentRepository.Delete(id);
+
+            if(commentModel == null) {
+                return NotFound("Comment does not exist");
+            }
+
+            return Ok(commentModel);
         }
     }
 }

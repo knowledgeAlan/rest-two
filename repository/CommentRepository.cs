@@ -25,6 +25,19 @@ namespace rest_two.Mappers
              return comment;
         }
 
+        public Comment Delete(int id)
+        {
+            var commentModel = _context.Comments.FirstOrDefault(x=>x.Id == id);
+
+            if(commentModel == null){
+                return null;
+            }
+
+            _context.Comments.Remove(commentModel);
+            _context.SaveChanges();
+            return commentModel;
+        }
+
         public   List<Comment> GetAll()
         {
            return   _context.Comments.ToList();

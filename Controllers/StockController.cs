@@ -4,8 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using rest_two.data;
 using rest_two.Dtos.stock;
+using rest_two.helpers;
 using rest_two.interfaces;
 using rest_two.Mappers;
 
@@ -27,11 +29,20 @@ namespace rest_two.Controllers
         }
 
         [HttpGet]
-        public    IActionResult GetAll() {
+        public    IActionResult GetAll([FromQuery] QueryObject queryObject) {
 
-            var stocks =  stockRepository.GetAllAsync();
+            var stocks =  stockRepository.GetAll(queryObject).AsQueryable();
+
+
             var stockDto = stocks.Select(s=> s.ToStockDto());
 
+            if(!string.IsNullOrEmpty(queryObject.CompanyName)){
+                stocks = stocks.Where(s=>s.CompanyName.Contains(queryObject.CompanyName));
+            }
+
+            if(!string.IsNullOrEmpty(queryObject.Symbol)){
+                stocks = stocks.Where(s=>s.Symbol.Contains(queryObject.Symbol));
+            }
             return Ok(stocks);
         }
 

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using rest_two.Dtos.stock;
+using rest_two.helpers;
 using rest_two.Models;
 
 namespace rest_two.interfaces
 {
     public interface IStockRepository
     {
-        List<Stock> GetAllAsync();
+        List<Stock> GetAll(QueryObject queryObject);
 
         Task<Stock?> GetByIdAsync(int id);
 
