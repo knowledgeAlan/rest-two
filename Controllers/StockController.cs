@@ -36,12 +36,19 @@ namespace rest_two.Controllers
 
             var stockDto = stocks.Select(s=> s.ToStockDto());
 
-            if(!string.IsNullOrEmpty(queryObject.CompanyName)){
+            if(!string.IsNullOrWhiteSpace(queryObject.CompanyName)){
                 stocks = stocks.Where(s=>s.CompanyName.Contains(queryObject.CompanyName));
             }
 
-            if(!string.IsNullOrEmpty(queryObject.Symbol)){
+            if(!string.IsNullOrWhiteSpace(queryObject.Symbol)){
                 stocks = stocks.Where(s=>s.Symbol.Contains(queryObject.Symbol));
+            }
+
+            if(!string.IsNullOrWhiteSpace(queryObject.SortBy)){
+
+                if(queryObject.SortBy.Equals("Symbol",StringComparison.OrdinalIgnoreCase)){
+                    stocks = queryObject.isDescending ? stocks.OrderByDescending(s=>s.Symbol) : stocks.OrderBy(s=> s.Symbol);
+                }
             }
             return Ok(stocks);
         }
