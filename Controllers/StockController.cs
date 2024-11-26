@@ -50,7 +50,10 @@ namespace rest_two.Controllers
                     stocks = queryObject.isDescending ? stocks.OrderByDescending(s=>s.Symbol) : stocks.OrderBy(s=> s.Symbol);
                 }
             }
-            return Ok(stocks);
+
+
+            var skipNumber = (queryObject.PageNumber - 1) * queryObject.PageSize;
+            return Ok(stocks.Skip(skipNumber).Take(queryObject.PageSize));
         }
 
 
