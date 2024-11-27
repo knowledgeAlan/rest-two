@@ -51,7 +51,7 @@ namespace rest_two.Controllers
                 }
             }
 
-
+            // pagination
             var skipNumber = (queryObject.PageNumber - 1) * queryObject.PageSize;
             return Ok(stocks.Skip(skipNumber).Take(queryObject.PageSize));
         }
