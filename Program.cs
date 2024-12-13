@@ -16,6 +16,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
  var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
 
         // Replace 'YourDbContext' with the name of your own DbContext derived class.
+//
         builder.Services.AddDbContext<ApplicationDBContext>(
             dbContextOptions => dbContextOptions
                 .UseMySql(connectionString, serverVersion)
