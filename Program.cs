@@ -1,9 +1,13 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using rest_two.data;
 using rest_two.interfaces;
 using rest_two.Mappers;
+using rest_two.Models;
 using rest_two.repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +30,34 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
         );
+builder.Services.AddIdentity<AppUser,IdentityRole>(options=>{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 12;
+}).AddEntityFrameworkStores<ApplicationDBContext>();
+
+builder.Services.AddAuthentication(options=>{
+    options.DefaultAuthenticateScheme = 
+    options.DefaultChallengeScheme=
+    options.DefaultForbidScheme=
+    options.DefaultScheme=
+    options.DefaultSignOutScheme=
+    options.DefaultSignInScheme= JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options=>{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])
+        )
+    };
+});
 builder.Services.AddScoped<IStockRepository,StockRespository>();
 builder.Services.AddScoped<ICommentRepository,CommentRepository>();
 builder.Services.AddControllers();
@@ -45,8 +77,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseAuthorization();
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapStaticAssets();
 app.MapControllers();
 app.MapControllerRoute(

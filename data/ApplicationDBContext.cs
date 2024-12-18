@@ -1,5 +1,6 @@
 
 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using rest_two.Models;
 
@@ -7,7 +8,7 @@ using rest_two.Models;
 namespace rest_two.data
 {
     
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext : IdentityDbContext<AppUser>
     {
          public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
