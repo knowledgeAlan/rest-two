@@ -13,7 +13,6 @@ using rest_two.repository;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//
 builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
